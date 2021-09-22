@@ -41,7 +41,7 @@ int main(void) {
 				if (!isEmpty(&top)) // Stack이 비어있지 않을때(Top이 NULL이 아닐때)
 					POP(&top);	// Top의 주소값을 전달
 				else
-					printf("STACK IS EMPTY!\n"); // Stack이 비었을때는 해당 문구 출력
+					printf("STACK IS EMPTY!\n\n"); // Stack이 비었을때는 해당 문구 출력
 				break;
 
 			case 3:
@@ -70,7 +70,7 @@ void PUSH(Stack **top, int value) {
 	p->next = *top;		// 새 노드의 next를 top으로 설정
 	*top = p;	// Stack의 Top을 새 노드 p로 설정
 
-	printf("%d Pushed!\n", value);
+	printf("%d Pushed!\n\n", value);
 }
 
 void POP(Stack **top) {
@@ -78,6 +78,6 @@ void POP(Stack **top) {
 	
 	remove = *top; // remove를 top으로 설정
 	*top = remove->next; // 제거하고자 하는 값의 next를 top으로 설정
-	printf("%d Popped!\n", remove->data); // 꺼낸 값을 출력하여 알려줌
+	printf("%d Popped!\n\n", remove->data); // 꺼낸 값을 출력하여 알려줌
 	free(remove); // 필요없는 값 제거
 }
