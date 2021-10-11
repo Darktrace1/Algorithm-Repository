@@ -28,6 +28,7 @@ void level_order(element ptr);
 void pre_order(element ptr);
 void find_leafnodes(element ptr);
 void find_max(element ptr);
+void deleteTree(element *root);
 
 int main(void) {
 	Node* root = make_tree();
@@ -35,8 +36,6 @@ int main(void) {
 	pre_order(root);
   find_leafnodes(root);
   find_max(root);
-  
-  free(root);
 	return 0;
 }
 // 	 제공된 Tree 도면
@@ -67,7 +66,6 @@ element make_tree(void) { // 노드 생성 함수
 	element n1 = alloc_newnode(1, n3, n2);
 	// 최상위 노드인 n1을 root node로 선언
 	element root = n1;
-
 	return root;
 }
 
@@ -128,6 +126,7 @@ void find_leafnodes(element ptr) { // 자식노드가 없는 노드를 출력하
 }
 
 void find_max(element ptr) { // node의 value 중 최댓값을 찾는 함수
+	element *tmp_root = &ptr;	 // 동적 메모리 해제를 위한 임시 루트변수 선언
 	int temp = ptr->value;		 // ptr의 value를 temp 변수에 저장
 
 	while(1) {
@@ -148,5 +147,16 @@ void find_max(element ptr) { // node의 value 중 최댓값을 찾는 함수
 			ptr = ptr->right;			// ptr을 ptr->right로 초기화
 	}
 	printf("[Max] %d\n", temp); // 최댓값 출력
-}
 
+	deleteTree(tmp_root); // 임시 루트변수를 동적메모리 해제 함수로 전달
+	//free(*tmp_root);			// 임시 루트변수 해제
+	//free(ptr);						// 전달받은 root 해제
+}	
+
+void deleteTree(element *tmp_root) { // 동적메모리 해제 함수 
+	if((*tmp_root) != NULL) { 			 	 // tmp_root가 NULL이 아닐때
+		deleteTree(&(*tmp_root)->left);  // 왼쪽 값으로 재귀호출
+		deleteTree(&(*tmp_root)->right); // 오른쪽 값으로 재귀호출
+		free(*tmp_root);								 // 노드 해제;
+	}
+}
