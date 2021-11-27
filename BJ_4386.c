@@ -142,4 +142,3 @@ double calc_dist(coordinate start, coordinate end) {
 	double y = pow(fabs(end.y - start.y), 2);
 	return sqrt(x + y);
 }
-
