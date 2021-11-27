@@ -31,8 +31,7 @@ void init_graph(GraphType *g);
 void insert_edge(GraphType *g, coordinate start, coordinate end, double w);
 int compare(const void *a, const void *b);
 void kruskal(GraphType *g);
-int dist_a_to_b(GraphType *g, coordinate *coor);
-// 두 점 사이의 거리를 계산하는 함수
+void dist_a_to_b(GraphType *g, coordinate *coor);
 double calc_dist(coordinate start, coordinate end);
 
 int main(void) {
@@ -42,20 +41,19 @@ int main(void) {
 
 	scanf("%d", &(g->ver_n));
 
-	coordinate coor[g->ver_n];
-	//coor = (coordinate *) malloc(sizeof(coordinate) * g->ver_n);
+	coordinate *coor;
+	coor = (coordinate *) malloc(sizeof(coordinate) * g->ver_n);
 
 	double x, y;
 	for(int i = 0; i < g->ver_n; i++) {
 		scanf("%lf %lf", &x, &y);
 		coor[i].x = x; coor[i].y = y; coor[i].n = i; // x, y 좌표 대입
-		//printf("%d: %.2lf, %.2lf ", coor[i].n, coor[i].x, coor[i].y);
 	}
 
 	dist_a_to_b(g, coor); // 두 점 사이의 거리 측정하여 간선에 비용삽입
 	kruskal(g);
 	free(g);
-	//free(coor);
+	free(coor);
 	return 0;
 }
 
@@ -128,7 +126,6 @@ void kruskal(GraphType *g) {
 	printf("%.2lf\n", ans);
 }
 
-// 
 void dist_a_to_b(GraphType *g, coordinate *coor) {
 	int k = 0;
 	double dist;
@@ -140,7 +137,6 @@ void dist_a_to_b(GraphType *g, coordinate *coor) {
 	}
 }
 
-// 두 점 사이의 거리를 계산하는 함수
 double calc_dist(coordinate start, coordinate end) {
 	double x = pow(fabs(end.x - start.x), 2);
 	double y = pow(fabs(end.y - start.y), 2);
