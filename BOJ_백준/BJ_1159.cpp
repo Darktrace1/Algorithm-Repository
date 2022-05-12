@@ -4,32 +4,31 @@
 using namespace std;
 
 int main(void)
-{	
+{
 	int N;
 	cin >> N;
 
-	int i, index, name[26];
-	string s;
+	int i, index, i_name[26];
+	string s_name;
 
-	memset(name, 0, sizeof(name));
+	memset(i_name, 0, sizeof(i_name));
 
 	for (i = 0; i< N; i++)
 	{
-		cin >> s;
-		index = s.at(0) - 97;
-		name[index]++;
+		cin >> s_name;
+		index = s_name.at(0) - 97;
+		i_name[index]++;
 	}
 
 	int status(0);
 	for (i = 0; i < 26; i++)
 	{
-		if (name[i] >= 5)
+		if (i_name[i] >= 5)
 		{
 			cout << (char)(i + 97);
 			status = 1;
 		}
 	}
-	
 	if (!status)
 		cout << "PREDAJA";
 
