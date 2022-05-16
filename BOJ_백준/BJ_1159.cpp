@@ -4,7 +4,7 @@
 using namespace std;
 
 int main(void)
-{	
+{
 	int N;
 	cin >> N;
 
@@ -29,8 +29,11 @@ int main(void)
 			status = 1;
 		}
 	}
+<<<<<<< HEAD
 	cout << "\n";
 
+=======
+>>>>>>> 0d0f76a87c3c1d1f72637159ecfaf7718204fa95
 	if (!status)
 		cout << "PREDAJA\n";
 
